@@ -1,7 +1,14 @@
 package org.lessons.springlamiapizzeriacrud.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "pizzas")
 public class Pizza {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(nullable = false)
     private String name;
     private String description;
     private String photo;
