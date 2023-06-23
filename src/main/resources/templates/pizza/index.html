@@ -1,12 +1,23 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <head th:insert="~{/fragments/resources :: head}">
-        <title>Pizza List</title>
-    </head>
+<head th:insert="~{/fragments/resources :: head}">
+    <title>Pizza List</title>
+</head>
 <body>
+<nav th:replace="~{/fragments/navbar :: navbar(current='pizza')}"></nav>
 <div class="container">
     <h1 class="text-center">Pizza List</h1>
+    <div>
+        <form method="GET" th:action="@{/pizza}">
+            <div class="input-group mb-3">
+                <input class="form-control" name="keyword" placeholder="Search pizza by name..." type="search"
+                       th:value="${searchString}">
+                <button class="btn btn-outline-secondary" type="submit">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+        </form>
+    </div>
     <h2 th:if="${pizzaList.size() == 0}">The list is empty</h2>
     <div class="row row-cols-1 row-cols-md-3 g-4" th:if="${pizzaList.size() > 0}">
         <div class="col" th:each="pizza : ${pizzaList}">
@@ -16,7 +27,7 @@
                     <h5 class="card-title" th:text="${pizza.name}"></h5>
                     <p class="card-text" th:text="${pizza.description}"></p>
                     <p class="card-text">Price: [[${pizza.price}]]€</p>
-                    <a th:href="@{|/pizza/${pizza.id}|}" class="btn btn-primary">Pizza details</a>
+                    <a th:href="@{|/pizza/${pizza.id}|}" class="btn btn-primary">Details</a>
                 </div>
             </div>
         </div>

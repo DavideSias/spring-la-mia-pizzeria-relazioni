@@ -6,6 +6,7 @@
     </head>
 </head>
 <body>
+<nav th:replace="~{/fragments/navbar :: navbar(current='pizza')}"></nav>
 <div class="container" th:object="${pizza}">
     <h1 th:text="*{name}"></h1>
     <p th:text="*{description}"></p>
