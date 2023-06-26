@@ -1,6 +1,10 @@
 package org.lessons.springlamiapizzeriacrud.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Table(name = "pizzas")
@@ -8,10 +12,16 @@ public class Pizza {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotBlank(message = "Name must not be null or blank")
+    @Size(max = 70)
     @Column(nullable = false)
     private String name;
+    @NotBlank(message = "Description must not be blank")
     private String description;
+    @NotBlank(message = "Photo url must not be blank")
+    @URL(message = "Photo must be an url")
     private String photo;
+    @Min(0)
     private double price;
 
     public Integer getId() {

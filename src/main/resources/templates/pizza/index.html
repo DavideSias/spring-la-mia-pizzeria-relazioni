@@ -7,16 +7,19 @@
 <nav th:replace="~{/fragments/navbar :: navbar(current='pizza')}"></nav>
 <div class="container">
     <h1 class="text-center">Pizza List</h1>
-    <div>
-        <form method="GET" th:action="@{/pizza}">
-            <div class="input-group mb-3">
-                <input class="form-control" name="keyword" placeholder="Search pizza by name..." type="search"
-                       th:value="${searchString}">
-                <button class="btn btn-outline-secondary" type="submit">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </div>
-        </form>
+    <div class="d-flex justify-content-between align-items-center my-3">
+        <a class="btn btn-success" th:href="@{/pizza/create}">New Pizza</a>
+        <div>
+            <form method="GET" th:action="@{/pizza}">
+                <div class="input-group mb-3">
+                    <input class="form-control" name="keyword" placeholder="Search pizza by name..." type="search"
+                           th:value="${searchString}">
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
     <h2 th:if="${pizzaList.size() == 0}">The list is empty</h2>
     <div class="row row-cols-1 row-cols-md-3 g-4" th:if="${pizzaList.size() > 0}">

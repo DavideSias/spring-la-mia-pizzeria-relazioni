@@ -1,6 +1,6 @@
-INSERT INTO `pizzas` (`price`, `description`, `name`, `photo`) VALUES (6.99, 'Pizza con pomodoro, mozzarella, salame.', 'Pizza con salame', '/img/pizza_salame.jpg');
-INSERT INTO `pizzas` (`price`, `description`, `name`, `photo`) VALUES (5.50, 'Pizza con pomodoro, mozzarella, pomodorini freschi.', 'Pizza con pomodorini', '/img/pizza_pomodorini.jpg');
-INSERT INTO `pizzas` (`price`, `description`, `name`, `photo`) VALUES (4.99, 'Pizza con pomodoro, mozzarella.', 'Pizza Margherita', '/img/pizza_margherita.jpg');
-INSERT INTO `pizzas` (`price`, `description`, `name`, `photo`) VALUES (4.99, 'Pizza con pomodoro, mozzarella.', 'Pizza Margherita', '/img/pizza_margherita.jpg');
-INSERT INTO `pizzas` (`price`, `description`, `name`, `photo`) VALUES (4.99, 'Pizza con pomodoro, mozzarella.', 'Pizza Margherita', '/img/pizza_margherita.jpg');
-INSERT INTO `pizzas` (`price`, `description`, `name`, `photo`) VALUES (4.99, 'Pizza con pomodoro, mozzarella.', 'Pizza Margherita', '/img/pizza_margherita.jpg');
+INSERT INTO `pizzas` (`price`, `description`, `name`, `photo`) VALUES (6.99, 'Pizza con pomodoro, mozzarella, salame.', 'Diavola', '/img/pizza_salame.jpg');
+INSERT INTO `pizzas` (`price`, `description`, `name`, `photo`) VALUES (5.50, 'Pizza con pomodoro, mozzarella, pomodorini freschi.', 'Pomodorini', '/img/pizza_pomodorini.jpg');
+INSERT INTO `pizzas` (`price`, `description`, `name`, `photo`) VALUES (4.99, 'Pizza con pomodoro, mozzarella, tonno, cipolla', 'Tonno e cipolla', 'https://media-assets.lacucinaitaliana.it/photos/61fbd8df3697f3ffd0cffbc5/3:2/w_1200,h_800,c_limit/pizza-tonno-cipolle-800.jpg');
+INSERT INTO `pizzas` (`price`, `description`, `name`, `photo`) VALUES (4.99, 'Pizza con pomodoro, mozzarella, gorgonzola, parmigiano, provola', 'Quattro formaggi', 'https://i0.wp.com/www.piccolericette.net/piccolericette/wp-content/uploads/2017/06/3234_Pizza.jpg?resize=895%2C616&ssl=1');
+INSERT INTO `pizzas` (`price`, `description`, `name`, `photo`) VALUES (4.99, 'Pizza con pomodoro, mozzarella.', 'Margherita', '/img/pizza_margherita.jpg');
+INSERT INTO `pizzas` (`price`, `description`, `name`, `photo`) VALUES (4.99, 'Pizza con pomodoro, mozzarella.', 'Margherita', '/img/pizza_margherita.jpg');
