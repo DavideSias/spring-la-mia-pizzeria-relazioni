@@ -17,6 +17,7 @@ public class Pizza {
     @Column(nullable = false)
     private String name;
     @NotBlank(message = "Description must not be blank")
+    @Size(max = 250)
     private String description;
     @NotBlank(message = "Photo url must not be blank")
     @URL(message = "Photo must be an url")
