@@ -12,6 +12,7 @@
     <p th:text="*{description}"></p>
     <img class="photo-pizza" th:src="*{photo}">
     <p>Price: [[*{price}]]€</p>
+    <a th:href="@{|/pizza/edit/${pizza.id}|}" class="btn btn-warning">Edit</a>
 </div>
 </body>
 </html>

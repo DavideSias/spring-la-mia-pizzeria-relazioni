@@ -1,3 +1,8 @@
 .photo-pizza{
     max-width: 400px;
 }
+
+.card-img-top{
+height: 30vh;
+object-fit: cover;
+}
