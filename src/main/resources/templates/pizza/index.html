@@ -21,8 +21,9 @@
             </form>
         </div>
     </div>
-    <div th:if="${message}" class="alert alert-success alert-dismissible fade show">
-        <span th:text="${message}"></span>
+    <div th:if="${message}" class="alert alert-dismissible fade show"
+         th:classAppend="${#strings.equalsIgnoreCase(message.type, 'SUCCESS')} ? 'alert-success' : 'alert-danger'">
+        <span th:text="${message.message}"></span>
         <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"></button>
     </div>
     <h2 th:if="${pizzaList.size() == 0}">The list is empty</h2>

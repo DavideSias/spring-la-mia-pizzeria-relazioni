@@ -1,11 +1,10 @@
 package org.lessons.springlamiapizzeriacrud.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.URL;
+
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "pizzas")
@@ -24,7 +23,8 @@ public class Pizza {
     @URL(message = "Photo must be an url")
     private String photo;
     @Min(0)
-    private double price;
+    @NotNull
+    private BigDecimal price;
 
     public Integer getId() {
         return id;
@@ -58,11 +58,11 @@ public class Pizza {
         this.photo = photo;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 }

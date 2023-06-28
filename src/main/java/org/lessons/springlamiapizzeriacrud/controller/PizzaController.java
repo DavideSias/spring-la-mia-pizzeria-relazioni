@@ -1,6 +1,8 @@
 package org.lessons.springlamiapizzeriacrud.controller;
 
 import jakarta.validation.Valid;
+import org.lessons.springlamiapizzeriacrud.messages.AlertMessage;
+import org.lessons.springlamiapizzeriacrud.messages.AltertMessageType;
 import org.lessons.springlamiapizzeriacrud.model.Pizza;
 import org.lessons.springlamiapizzeriacrud.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -57,10 +60,13 @@ public class PizzaController {
 
     @PostMapping("/create")
     public String store(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, RedirectAttributes redirAttrs) {
+        if (!isUniqueName(formPizza)) {
+            bindingResult.addError(new FieldError("pizza", "name", formPizza.getName(), false, null, null, "pizza name must be unique"));
+        }
         if (bindingResult.hasErrors()) {
             return "/pizza/edit";
         }
-        redirAttrs.addFlashAttribute("message", "New Pizza added");
+        redirAttrs.addFlashAttribute("message", new AlertMessage(AltertMessageType.SUCCESS, "Pizza created"));
         pizzaRepository.save(formPizza);
         return "redirect:/pizza";
     }
@@ -75,12 +81,15 @@ public class PizzaController {
     @PostMapping("/edit/{id}")
     public String update(@PathVariable Integer id, @Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         Pizza pizzaEdit = getPizzaById(id);
+        if (!pizzaEdit.getName().equals(formPizza.getName()) && !isUniqueName(formPizza)) {
+            bindingResult.addError(new FieldError("pizza", "name", formPizza.getName(), false, null, null, "pizza name must be unique"));
+        }
         if (bindingResult.hasErrors()) {
             return "/pizza/edit";
         }
         formPizza.setId(formPizza.getId());
         pizzaRepository.save(formPizza);
-        redirectAttributes.addFlashAttribute("message", "Pizza updated");
+        redirectAttributes.addFlashAttribute("message", new AlertMessage(AltertMessageType.SUCCESS, "Pizza with id " + pizzaEdit.getId() + " updated"));
         return "redirect:/pizza";
     }
 
@@ -88,7 +97,7 @@ public class PizzaController {
     public String delete(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         Pizza pizzaToDelete = getPizzaById(id);
         pizzaRepository.delete(pizzaToDelete);
-        redirectAttributes.addFlashAttribute("message", "Pizza deleted");
+        redirectAttributes.addFlashAttribute("message", new AlertMessage(AltertMessageType.SUCCESS, "Pizza " + pizzaToDelete.getName() + " deleted"));
         return "redirect:/pizza";
     }
 
@@ -98,5 +107,10 @@ public class PizzaController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pizza with id" + id + " not found");
         }
         return result.get();
+    }
+
+    private boolean isUniqueName(Pizza pizzaForm) {
+        Optional<Pizza> result = pizzaRepository.findByName(pizzaForm.getName());
+        return result.isEmpty();
     }
 }
