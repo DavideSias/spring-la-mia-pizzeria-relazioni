@@ -8,11 +8,35 @@
 <body>
 <nav th:replace="~{/fragments/navbar :: navbar(current='pizza')}"></nav>
 <div class="container" th:object="${pizza}">
-    <h1 th:text="*{name}"></h1>
-    <p th:text="*{description}"></p>
-    <img class="photo-pizza" th:src="*{photo}">
-    <p>Price: [[*{price}]]€</p>
-    <a th:href="@{|/pizza/edit/${pizza.id}|}" class="btn btn-warning">Edit</a>
+    <section>
+        <h1 th:text="*{name}"></h1>
+        <p th:text="*{description}"></p>
+        <img class="photo-pizza" th:src="*{photo}">
+        <p>Price: [[*{price}]]€</p>
+        <a th:href="@{|/pizza/edit/${pizza.id}|}" class="btn btn-warning">Edit</a>
+    </section>
+    <section>
+        <h2>Special Offers</h2>
+        <table class="table" th:if="${pizza.offers.size() > 0}">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Start offer</th>
+                <th>End offer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="offer : ${pizza.offers}" th:object="${offer}">
+                <td th:text="*{title}"></td>
+                <td th:text="*{#temporals.format(startDate, 'dd/MM/yyyy')}"></td>
+                <td th:text="*{#temporals.format(endDate, 'dd/MM/yyyy')}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="alert alert-info" th:unless="${pizza.offers.size() > 0}">
+            No offer for this pizza
+        </div>
+    </section>
 </div>
 </body>
 </html>
