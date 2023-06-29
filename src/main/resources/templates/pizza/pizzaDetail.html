@@ -17,6 +17,11 @@
     </section>
     <section>
         <h2>Special Offers</h2>
+        <div class="my-3">
+            <a class="btn btn-primary" th:href="@{/offers/create(pizzaId=${pizza.id})}">
+                Create new offer
+            </a>
+        </div>
         <table class="table" th:if="${pizza.offers.size() > 0}">
             <thead>
             <tr>
