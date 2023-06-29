@@ -5,6 +5,8 @@ import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.URL;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "pizzas")
@@ -25,6 +27,8 @@ public class Pizza {
     @Min(0)
     @NotNull
     private BigDecimal price;
+    @OneToMany(mappedBy = "pizza", cascade = {CascadeType.REMOVE})
+    private List<Offer> offers = new ArrayList<>();
 
     public Integer getId() {
         return id;
