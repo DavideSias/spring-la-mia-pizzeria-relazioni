@@ -45,4 +45,35 @@ public class OfferController {
         offerRepository.save(formOffer);
         return "redirect:/pizza/" + formOffer.getPizza().getId();
     }
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Integer id, Model model) {
+        Optional<Offer> offer = offerRepository.findById(id);
+        if (offer.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        model.addAttribute("offer", offer.get());
+        return "/offers/form";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String update(@PathVariable Integer id, @Valid @ModelAttribute("offer") Offer formOffer, BindingResult bindingResult) {
+        Optional<Offer> offerToEdit = offerRepository.findById(id);
+        if (offerToEdit.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        formOffer.setId(id);
+        offerRepository.save(formOffer);
+        return "redirect:/pizza/" + formOffer.getPizza().getId();
+    }
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id) {
+        Optional<Offer> offerToDelete = offerRepository.findById(id);
+        if (offerToDelete.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        offerRepository.delete(offerToDelete.get());
+        return "redirect:/pizza/" + offerToDelete.get().getPizza().getId();
+    }
 }
